@@ -1,20 +1,22 @@
 import { useState } from "react";
 
-export const AddCategory = () => {
-  const [inputValue, setInputValue] = useState("Hunter x Hunter");
+export const AddCategory = ({ setCategories }) => {
+  const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = ({ target }) => {
     setInputValue(target.value);
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); 
-    console.log({inputValue});
+    event.preventDefault();
+    // console.log({inputValue});
+    if (inputValue.trim().length <= 1) return;
+    setCategories((categories) => [inputValue, ...categories]);
+    setInputValue("");
   };
-  return (
-    <form onSubmit={ (event) => handleSubmit(event)}>
-      {inputValue}
 
+  return (
+    <form onSubmit={(event) => handleSubmit(event)}>
       <input
         type="text"
         placeholder="Buscar gifs"
