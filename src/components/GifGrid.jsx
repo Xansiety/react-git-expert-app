@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGifs } from "../helpers/getGifts";
+import { GifCard } from "./GifCard";
 
 export const GifGrid = ({ category }) => {
   // De esta forma se ejecuta cada vez que se redibuja el componente
@@ -19,11 +20,16 @@ export const GifGrid = ({ category }) => {
     <>
       <h3>{category}</h3>
 
-      <ol>
-        {images.map(({ id, title, url }) => (
-          <li key={id}>{title}</li>
-        ))} 
-      </ol>
+      <div className="card-grid">
+        {images.map((image) => (
+          <GifCard
+            key={image.id}
+            {...image}
+            //   title={image.title}
+            //   url={image.url}
+          />
+        ))}
+      </div>
     </>
   );
 };
