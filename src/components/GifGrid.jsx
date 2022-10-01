@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
-import { getGifs } from "../helpers/getGifts";
 import { GifCard } from "./GifCard";
+import { useFetchGifs } from "../hooks/useFetchGifs";
 
 export const GifGrid = ({ category }) => {
   // De esta forma se ejecuta cada vez que se redibuja el componente
   // getGifs(category);
 
-  const [images, setimages] = useState([]);
-
-  const getImages = async () => {
-    const newImages = await getGifs(category);
-    setimages(newImages);
-  };
-  useEffect(() => {
-    getImages();
-  }, []);
+  const { images, isLoading } = useFetchGifs(category)
+ 
+  // console.log({images, isLoading})
 
   return (
     <>
